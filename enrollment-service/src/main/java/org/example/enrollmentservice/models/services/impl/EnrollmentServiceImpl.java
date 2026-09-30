@@ -31,6 +31,13 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         @Override
         public EnrollmentResponse createEnrollment(CreateEnrollmentRequest request) {
                 throw new UnsupportedOperationException();
+                List<CreateEnrollmentDetailRequest> enrollmentList = new ArrayList<>(request.items());
+                if(enrollmentList.isEmpty()) {
+                        throw new RuntimeException("List items is empty");
+                }
+                return enrollmentList.get(request.items(enrollmentDetailRepository.findAll(enrollmentList)));
         }
+
+
 
 }
