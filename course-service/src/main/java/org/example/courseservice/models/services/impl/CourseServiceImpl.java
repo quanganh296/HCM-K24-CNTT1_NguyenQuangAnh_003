@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
@@ -17,10 +18,15 @@ public class CourseServiceImpl implements CourseService {
         this.courseRepository = courseRepository;
     }
 
+
     @Override
     @Transactional(readOnly = true)
+    @Cacheable("id")
     public Course getCourseById(Long id) {
         return courseRepository.findById(id)
                 .orElseThrow(() -> new CourseNotFoundException(id));
     }
+
+
+
 }
